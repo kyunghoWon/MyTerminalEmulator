@@ -5,5 +5,8 @@ int main(void)
 {
 	printA();
 	printB();
+
+	printA();
+
 	return 0;
 }
