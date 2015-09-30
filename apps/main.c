@@ -8,7 +8,7 @@ int main(void)
 
 	printB();
 	printB();
-	printB();
+	printA();
 
 	return 0;
 }
