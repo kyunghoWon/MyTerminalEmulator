@@ -3,8 +3,7 @@
 
 int main(void)
 {
-	printA();
-	printB();
+	printf("fsdafsd");
 
 	printB();
 	printB();
