@@ -3,8 +3,7 @@
 
 int main(void)
 {
-	printf("vczxvxzcvvff");
-	printB();
+	printf("fsdafsd");
 
 	printB();
 	printB();
