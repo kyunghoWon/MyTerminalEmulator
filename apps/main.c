@@ -3,12 +3,13 @@
 
 int main(void)
 {
-	printA();
+	printf("vczxvxzcvvff");
 	printB();
 
 	printB();
 	printB();
 	printA();
+	printf("hahahahahahaha");
 
 	return 0;
 }
