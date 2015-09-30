@@ -9,7 +9,7 @@ int main(void)
 	printB();
 	printB();
 	printA();
-	printf("hahahahahahaha");
+	printf("201201716 Kyungho Won");
 
 	return 0;
 }
