@@ -6,7 +6,9 @@ int main(void)
 	printA();
 	printB();
 
-	printA();
+	printB();
+	printB();
+	printB();
 
 	return 0;
 }
