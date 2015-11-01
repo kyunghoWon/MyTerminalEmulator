@@ -1,7 +1,6 @@
 
 int main(void)
 {
-	printf("fsdafsd");
 	printf("Hello world");
 
 	printB();
