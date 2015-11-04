@@ -3,9 +3,6 @@
 #include <string.h>
 #include <unistd.h>
 #include <sys/types.h>
-#include <gtk/gtk.h>
-#include <gdk/gdkscreen.h>
-#include <cairo.h>
 
 int main(int argc, char *argv[])
 {

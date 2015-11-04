@@ -1,3 +1,3 @@
-main2: main2.c
-	gcc `pkg-config --cflags gtk+-3.0` -o main2 main2.c -Wall\
+main3: main3.c
+	gcc `pkg-config --cflags gtk+-3.0` -o main3 main3.c -Wall\
  `pkg-config --libs gtk+-3.0`
