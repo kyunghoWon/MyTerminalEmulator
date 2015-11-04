@@ -4,7 +4,7 @@
  *     (http://stackoverflow.com/questions/3908565/how-to-make-gtk-window-background-transparent)
  * Re-worked for Gtk 3 by Louis Melahn, L.C., January 30, 2014.
  */
-
+//djsldjs
 #include <gtk/gtk.h>
 
 static void screen_changed(GtkWidget *widget, GdkScreen *old_screen, gpointer user_data);
