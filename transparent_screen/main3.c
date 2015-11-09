@@ -6,12 +6,30 @@
  */
 //djsldjs
 #include <gtk/gtk.h>
+#include <string.h>
 
 static void screen_changed(GtkWidget *widget, GdkScreen *old_screen, gpointer user_data);
 static gboolean draw(GtkWidget *widget, cairo_t *new_cr, gpointer user_data);
 static void clicked(GtkWindow *win, GdkEventButton *event, gpointer user_data);
 
 int i;
+
+
+static gboolean key_event(GtkWidget *widget, GdkEventKey *event, gpointer user_data)
+{
+    g_printerr("%s\n",
+               gdk_keyval_name (event->keyval));
+
+    if(strcmp(gdk_keyval_name (event->keyval),"F12") == 0)
+    {
+       gtk_widget_hide(user_data);
+    }
+    else if(strcmp(gdk_keyval_name(event->keyval),"F10") == 0)
+    {
+       gtk_widget_show(user_data);
+    }
+    return FALSE;
+}
 
 int main(int argc, char **argv)
 {
@@ -31,16 +49,17 @@ int main(int argc, char **argv)
     g_signal_connect(G_OBJECT(window), "draw", G_CALLBACK(draw), NULL);
     g_signal_connect(G_OBJECT(window), "screen-changed", G_CALLBACK(screen_changed), NULL);
 
+     
+
     gtk_window_set_decorated(GTK_WINDOW(window), TRUE);
     gtk_widget_add_events(window, GDK_BUTTON_PRESS_MASK);
     
-
-    GtkWidget* fixed_container = gtk_fixed_new();
     gtk_container_add(GTK_CONTAINER(window), box);
     GtkWidget* button = gtk_button_new_with_label("Make the screen trasparent");
 
 
     view = gtk_text_view_new();
+    g_signal_connect(window, "key-release-event", G_CALLBACK(key_event), view);
     buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(view));
 
     gtk_text_buffer_set_text(buffer, "hello, world.", -1);
@@ -124,4 +143,7 @@ static void clicked(GtkWindow *win, GdkEventButton *event, gpointer user_data)
     }	
     //gtk_window_set_decorated(win, !gtk_window_get_decorated(win));
 } 
+
+
+
  
