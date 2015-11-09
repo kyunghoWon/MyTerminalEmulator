@@ -7,6 +7,13 @@
 //djsldjs
 #include <gtk/gtk.h>
 #include <string.h>
+#include <stdlib.h>
+
+struct my_gtk
+{
+   GtkWidget *file_one;
+   GtkTextBuffer *file_two;
+};
 
 static void screen_changed(GtkWidget *widget, GdkScreen *old_screen, gpointer user_data);
 static gboolean draw(GtkWidget *widget, cairo_t *new_cr, gpointer user_data);
@@ -28,17 +35,24 @@ static gboolean key_event(GtkWidget *widget, GdkEventKey *event, gpointer user_d
     {
        gtk_widget_show(user_data);
     }
+    else if(strcmp(gdk_keyval_name(event->keyval),"RETURN") == 0)
+    {
+	user_data->file_two = gtk_text_view_get_buffer(GTK_TEXT_VIEW((GTK_WIDGET)user_data->file_one));
+    	gtk_text_buffer_set_text(user_data->file_one, "hello, kyungho.", -1);
+    
+    }
     return FALSE;
 }
 
 int main(int argc, char **argv)
 {
     gtk_init(&argc, &argv);
-
+    struct my_gtk mygtk;
     GtkWidget *window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
     GtkWidget *box = gtk_box_new(1,0); // 1: vbox, 0:hbox
     GtkWidget* view;
-    GtkTextBuffer* buffer;
+    
+    GtkTextBuffer* buffer = NULL;
     gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
     gtk_window_set_default_size(GTK_WINDOW(window), 800, 600);
     gtk_window_set_title(GTK_WINDOW(window), "Alpha Demo");
@@ -49,8 +63,6 @@ int main(int argc, char **argv)
     g_signal_connect(G_OBJECT(window), "draw", G_CALLBACK(draw), NULL);
     g_signal_connect(G_OBJECT(window), "screen-changed", G_CALLBACK(screen_changed), NULL);
 
-     
-
     gtk_window_set_decorated(GTK_WINDOW(window), TRUE);
     gtk_widget_add_events(window, GDK_BUTTON_PRESS_MASK);
     
@@ -59,10 +71,16 @@ int main(int argc, char **argv)
 
 
     view = gtk_text_view_new();
-g_signal_connect(window, "key-release-event", G_CALLBACK(key_event), view);
+    
     buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(view));
 
     gtk_text_buffer_set_text(buffer, "hello, world.", -1);
+
+    mygtk.file_one = view;
+    mygtk.file_two = buffer;
+   
+
+    g_signal_connect(window, "key-release-event", G_CALLBACK(key_event), &mygtk);
     g_signal_connect(G_OBJECT(window), "button-press-event", G_CALLBACK(clicked), view);
 
     gtk_widget_set_size_request(view, 800,550);
@@ -76,6 +94,8 @@ g_signal_connect(window, "key-release-event", G_CALLBACK(key_event), view);
    // gtk_box_pack_start(GTK_BOX(box), view, TRUE, FALSE, 0);
 
     screen_changed(window, NULL, NULL);
+
+    
 
     gtk_widget_show_all(window);
     
