@@ -74,8 +74,12 @@ int main(int argc, char **argv)
     view = gtk_text_view_new();
     
     buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(view));
-
+  gtk_text_buffer_create_tag (buffer, "heading",
+			      "weight", PANGO_WEIGHT_BOLD,
+			      "size", 15 * PANGO_SCALE,
+			      NULL);
     gtk_text_buffer_set_text(buffer, "hello, world.", -1);
+    
 
     mygtk.file_one = view;
     mygtk.file_two = buffer;

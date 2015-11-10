@@ -37,9 +37,10 @@ static gboolean key_event(GtkWidget *widget, GdkEventKey *event, gpointer user_d
     }
     else if(strcmp(gdk_keyval_name(event->keyval),"RETURN") == 0)
     {
+/*
 	user_data->file_two = gtk_text_view_get_buffer(GTK_TEXT_VIEW((GTK_WIDGET)user_data->file_one));
     	gtk_text_buffer_set_text(user_data->file_one, "hello, kyungho.", -1);
-    
+  */  
     }
     return FALSE;
 }
@@ -47,7 +48,7 @@ static gboolean key_event(GtkWidget *widget, GdkEventKey *event, gpointer user_d
 int main(int argc, char **argv)
 {
     gtk_init(&argc, &argv);
-    struct my_gtk mygtk;
+    sstruct my_gtk mygtk;
     GtkWidget *window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
     GtkWidget *box = gtk_box_new(1,0); // 1: vbox, 0:hbox
     GtkWidget* view;
@@ -73,14 +74,18 @@ int main(int argc, char **argv)
     view = gtk_text_view_new();
     
     buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(view));
-
+  gtk_text_buffer_create_tag (buffer, "heading",
+			      "weight", PANGO_WEIGHT_BOLD,
+			      "size", 15 * PANGO_SCALE,
+			      NULL);
     gtk_text_buffer_set_text(buffer, "hello, world.", -1);
+    
 
     mygtk.file_one = view;
     mygtk.file_two = buffer;
    
 
-    g_signal_connect(window, "key-release-event", G_CALLBACK(key_event), &mygtk);
+    g_signal_connect(window, "key-release-event", G_CALLBACK(key_event), view);
     g_signal_connect(G_OBJECT(window), "button-press-event", G_CALLBACK(clicked), view);
 
     gtk_widget_set_size_request(view, 800,550);
