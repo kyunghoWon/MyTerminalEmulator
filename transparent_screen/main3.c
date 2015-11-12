@@ -56,7 +56,7 @@ int main(int argc, char **argv)
     GtkTextBuffer* buffer = NULL;
     gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
     gtk_window_set_default_size(GTK_WINDOW(window), 800, 600);
-    gtk_window_set_title(GTK_WINDOW(window), "Alpha Demo");
+    gtk_window_set_title(GTK_WINDOW(window), "Our Editor");
     g_signal_connect(G_OBJECT(window), "delete-event", gtk_main_quit, NULL);
 
     gtk_widget_set_app_paintable(window, TRUE);
