@@ -80,6 +80,8 @@ int main(int argc, char **argv)
 
 
     view = gtk_text_view_new();
+    gtk_text_view_set_left_margin (GTK_TEXT_VIEW ( view ) , 1 0 ) ;
+    gtk_text_view_set_right_margin (GTK_TEXT_VIEW ( view ) , 1 0 ) ;
 
     buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(view));
     gtk_text_buffer_set_text(buffer, "User:$ ", -1);
@@ -155,16 +157,21 @@ static gboolean draw(GtkWidget *widget, cairo_t *cr, gpointer userdata)
 static void clicked(GtkWindow *win, GdkEventButton *event, gpointer user_data)
 {
     /* toggle window manager frames */
-    GtkWidget *font_dialog = gtk_font_chooser_dialog_new();
+   // GtkWidget *window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+    GtkWidget *font_dialog = gtk_font_chooser_dialog_new("haha", NULL);
+    //gtk_container_add (GTK_CONTAINER (window), font_dialog);
+    gtk_widget_show_all (font_dialog); 
+    /*
     if(i != 1)
     {
-       font_dialog.show();
+       
     }
     else
     {
        gtk_widget_show(user_data);
        i=0;
     }
+     */
     //gtk_window_set_decorated(win, !gtk_window_get_decorated(win));
 }
 
