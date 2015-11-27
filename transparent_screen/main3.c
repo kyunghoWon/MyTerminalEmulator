@@ -36,14 +36,12 @@ static gboolean key_event(GtkWidget *widget, GdkEventKey *event, gpointer user_d
     {
        gtk_widget_show(user_data);
     }
-    else if(strcmp(gdk_keyval_name(event->keyval),"RETURN") == 0)
+    else if(strcmp(gdk_keyval_name(event->keyval),"Return") == 0)
     {
-
-
 	//user_data->file_two = gtk_text_view_get_buffer(GTK_TEXT_VIEW((GTK_WIDGET)user_data->file_one));
     	//gtk_text_buffer_set_text(user_data->file_one, "User$:", -1);
-  	gtk_text_buffer_set_text(buffer, "User:$", -1);
-
+  	gtk_text_buffer_set_text(user_data, "User:$", -1);
+    }
     return FALSE;
 }
 
