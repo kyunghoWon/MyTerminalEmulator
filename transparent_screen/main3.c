@@ -38,10 +38,16 @@ static gboolean key_event(GtkWidget *widget, GdkEventKey *event, gpointer user_d
     }
     else if(strcmp(gdk_keyval_name(event->keyval),"Return") == 0)
     {
+<<<<<<< HEAD
 	//user_data->file_two = gtk_text_view_get_buffer(GTK_TEXT_VIEW((GTK_WIDGET)user_data->file_one));
     	//gtk_text_buffer_set_text(user_data->file_one, "User$:", -1);
   	gtk_text_buffer_set_text(user_data, "User:$", -1);
     }
+=======
+
+  	gtk_text_buffer_set_text(buffer, "User:$", -1);
+
+>>>>>>> 8fc198227748bb3876c96c4f6ed481e21207e7d1
     return FALSE;
 }
 
@@ -74,7 +80,7 @@ int main(int argc, char **argv)
     view = gtk_text_view_new();
 
     buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(view));
-  gtk_text_buffer_create_tag (buffer, "heading",
+    gtk_text_buffer_create_tag (buffer, "heading",
 			      "weight", PANGO_WEIGHT_BOLD,
 			      "size", 15 * PANGO_SCALE,
 			      NULL);
