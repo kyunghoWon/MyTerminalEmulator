@@ -25,29 +25,31 @@ GtkTextBuffer* buffer = NULL;
 
 static gboolean key_event(GtkWidget *widget, GdkEventKey *event, gpointer user_data)
 {
-    g_printerr("%s\n",
-               gdk_keyval_name (event->keyval));
-
+    struct my_gtk *my = (struct my_gtk *)user_data;
+    GtkTextMark *mark;
+    GtkTextIter iter;	
+    //g_printerr("%s\n", gdk_keyval_name (event->keyval));    
     if(strcmp(gdk_keyval_name (event->keyval),"F12") == 0)
     {
-       gtk_widget_hide(user_data);
+       gtk_widget_hide(my->file_one);
     }
     else if(strcmp(gdk_keyval_name(event->keyval),"F10") == 0)
     {
-       gtk_widget_show(user_data);
+       gtk_widget_show(my->file_one);
     }
     else if(strcmp(gdk_keyval_name(event->keyval),"Return") == 0)
     {
-<<<<<<< HEAD
-	//user_data->file_two = gtk_text_view_get_buffer(GTK_TEXT_VIEW((GTK_WIDGET)user_data->file_one));
-    	//gtk_text_buffer_set_text(user_data->file_one, "User$:", -1);
-  	gtk_text_buffer_set_text(user_data, "User:$", -1);
+        mark = gtk_text_buffer_get_insert(my->file_two);
+        gtk_text_buffer_get_iter_at_mark(my->file_two, &iter, mark);
+	/*
+        if(gtk_text_buffer_get_char_count(my->file_two))
+        {
+           gtk_text_buffer_insert(my->file_two, &iter, "\n", 1);
+        }
+	*/
+	gtk_text_buffer_insert(my->file_two, &iter, "User:$ ", -1);
     }
-=======
 
-  	gtk_text_buffer_set_text(buffer, "User:$", -1);
-
->>>>>>> 8fc198227748bb3876c96c4f6ed481e21207e7d1
     return FALSE;
 }
 
@@ -80,18 +82,14 @@ int main(int argc, char **argv)
     view = gtk_text_view_new();
 
     buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(view));
-    gtk_text_buffer_create_tag (buffer, "heading",
-			      "weight", PANGO_WEIGHT_BOLD,
-			      "size", 15 * PANGO_SCALE,
-			      NULL);
-    gtk_text_buffer_set_text(buffer, "User:$", -1);
+    gtk_text_buffer_set_text(buffer, "User:$ ", -1);
 
 
     mygtk.file_one = view;
     mygtk.file_two = buffer;
 
 
-    g_signal_connect(window, "key-release-event", G_CALLBACK(key_event), view);
+    g_signal_connect(window, "key-release-event", G_CALLBACK(key_event), &mygtk);
     g_signal_connect(G_OBJECT(window), "button-press-event", G_CALLBACK(clicked), view);
 
     gtk_widget_set_size_request(view, 800,550);
@@ -100,9 +98,6 @@ int main(int argc, char **argv)
 
     gtk_container_add(GTK_CONTAINER(box), button);
     gtk_container_add(GTK_CONTAINER(box), view);
-
-   // gtk_box_pack_start(GTK_BOX(box), button, TRUE, FALSE, 0);
-   // gtk_box_pack_start(GTK_BOX(box), view, TRUE, FALSE, 0);
 
     screen_changed(window, NULL, NULL);
 
@@ -152,7 +147,6 @@ static gboolean draw(GtkWidget *widget, cairo_t *cr, gpointer userdata)
     /* draw the background */
     cairo_set_operator (new_cr, CAIRO_OPERATOR_SOURCE);
     cairo_paint (new_cr);
-
     cairo_destroy(new_cr);
 
     return FALSE;
@@ -161,10 +155,10 @@ static gboolean draw(GtkWidget *widget, cairo_t *cr, gpointer userdata)
 static void clicked(GtkWindow *win, GdkEventButton *event, gpointer user_data)
 {
     /* toggle window manager frames */
+    GtkWidget *font_dialog = gtk_font_chooser_dialog_new();
     if(i != 1)
     {
-       gtk_widget_hide(user_data);
-       i=1;
+       
     }
     else
     {
