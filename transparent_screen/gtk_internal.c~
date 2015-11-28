@@ -34,38 +34,4 @@ static gboolean key_event(GtkWidget *widget, GdkEventKey *event, gpointer user_d
     return FALSE;
 }
 
-///Main code start
-
-int main(int argc, char *argv[])
-{
-    GtkWidget *box, *scroll, *widget;
-    GtkWidget *window;
-    GtkWidget *view;
-
-    GtkAccelGroup *accel;
-    GtkItemFactory *main_menu;
-    //GtkTextBuffer *buffer;
-
-    gtk_init(&argc, &argv);  // gtk initialize
-
-    window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-
-    gtk_window_set_title(GTK_WINDOW(window), "Text Editor");
-    gtk_window_set_default_size(GTK_WINDOW(window), 600, 500);
-
-    box = gtk_vbox_new(FALSE, 0);
-
-    gtk_container_add(GTK_CONTAINER(window), box);
-
-    accel = gtk_accel_group_new();
-    gtk_window_add_accel_group(GTK_WINDOW(window), accel);
-
-
-    gtk_widget_show_all(window);
-    gtk_main();
-
-    return 0;
-}
-
-
 
