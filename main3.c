@@ -1,16 +1,7 @@
-/*
- * Original code by: Mike - http://plan99.net/~mike/blog (now a dead link--unable to find it).
- * Modified by karlphillip for StackExchange:
- *     (http://stackoverflow.com/questions/3908565/how-to-make-gtk-window-background-transparent)
- * Re-worked for Gtk 3 by Louis Melahn, L.C., January 30, 2014.
- */
-
 #include <gtk/gtk.h>
-#include <gtk_internal.h>
-#include <gtk_external.h>
 #include <string.h>
 #include <stdlib.h>
-gboolean supports_alpha = FALSE;
+
 struct my_gtk
 {
    GtkWidget *file_one;
@@ -21,6 +12,38 @@ static void screen_changed(GtkWidget *widget, GdkScreen *old_screen, gpointer us
 static gboolean draw(GtkWidget *widget, cairo_t *new_cr, gpointer user_data);
 static void clicked(GtkWindow *win, GdkEventButton *event, gpointer user_data);
 
+int i;
+
+
+static gboolean key_event(GtkWidget *widget, GdkEventKey *event, gpointer user_data)
+{
+    struct my_gtk *my = (struct my_gtk *)user_data;
+    GtkTextMark *mark;
+    GtkTextIter iter;	
+    //g_printerr("%s\n", gdk_keyval_name (event->keyval));    
+    if(strcmp(gdk_keyval_name (event->keyval),"F12") == 0)
+    {
+       gtk_widget_hide(my->file_one);
+    }
+    else if(strcmp(gdk_keyval_name(event->keyval),"F10") == 0)
+    {
+       gtk_widget_show(my->file_one);
+    }
+    else if(strcmp(gdk_keyval_name(event->keyval),"Return") == 0)
+    {
+        mark = gtk_text_buffer_get_insert(my->file_two);
+        gtk_text_buffer_get_iter_at_mark(my->file_two, &iter, mark);
+	/*
+        if(gtk_text_buffer_get_char_count(my->file_two))
+        {
+           gtk_text_buffer_insert(my->file_two, &iter, "\n", 1);
+        }
+	*/
+	gtk_text_buffer_insert(my->file_two, &iter, "User:$ ", -1);
+    }
+
+    return FALSE;
+}
 
 int main(int argc, char **argv)
 {
@@ -29,7 +52,7 @@ int main(int argc, char **argv)
     GtkWidget *window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
     GtkWidget *box = gtk_box_new(1,0); // 1: vbox, 0:hbox
     GtkWidget* view;
-    printA();
+
     GtkTextBuffer* buffer = NULL;
     gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
     gtk_window_set_default_size(GTK_WINDOW(window), 800, 600);
@@ -80,7 +103,7 @@ int main(int argc, char **argv)
     return 0;
 }
 
-
+gboolean supports_alpha = FALSE;
 static void screen_changed(GtkWidget *widget, GdkScreen *old_screen, gpointer userdata)
 {
     /* To check if the display supports alpha channels, get the visual */
@@ -130,7 +153,6 @@ static void clicked(GtkWindow *win, GdkEventButton *event, gpointer user_data)
     GtkWidget *font_dialog = gtk_font_chooser_dialog_new("haha", NULL);
     //gtk_container_add (GTK_CONTAINER (window), font_dialog);
     gtk_widget_show_all (font_dialog); 
-    printA();
     /*
     if(i != 1)
     {
@@ -144,7 +166,6 @@ static void clicked(GtkWindow *win, GdkEventButton *event, gpointer user_data)
      */
     //gtk_window_set_decorated(win, !gtk_window_get_decorated(win));
 }
-
 
 
 

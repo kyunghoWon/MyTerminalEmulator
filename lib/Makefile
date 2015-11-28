@@ -1,14 +1,14 @@
-FUNC = func1.o func2.o
+FUNC = gtk_internal.o gtk_external.o
 OUTPUT = libfuncs.a
 
 $(OUTPUT): $(FUNC)
 	ar rv $(OUTPUT) $(FUNC)
 
-func1.o: func1.c
-	gcc -c -g -I../include func1.c -o func1.o
+gtk_internal.o: gtk_internal.c
+	gcc `pkg-config --cflags gtk+-3.0` -c -g -I../include gtk_internal.c -o gtk_internal.o `pkg-config --libs gtk+-3.0`
 
-func2.o: func2.c
-	gcc -c -g -I../include func2.c -o func2.o
+gtk_external.o: gtk_external.c
+	gcc `pkg-config --cflags gtk+-3.0` -c -g -I../include gtk_external.c -o gtk_external.o `pkg-config --libs gtk+-3.0`
 
 clean:
-	rm -f *.o $(OUTPUT)
+	rm -f *.o *.c~ $(OUTPUT)
