@@ -57,9 +57,22 @@ int main(int argc, char *argv[])
 
     gtk_container_add(GTK_CONTAINER(window), box);
 
+//Default contents add
+//ITem,etc add start
+
     accel = gtk_accel_group_new();
     gtk_window_add_accel_group(GTK_WINDOW(window), accel);
+    main_menu = gtk_item_factory_new(GTK_TYPE_MENU_BAR, "<TextView>", accel);
 
+    widget = gtk_item_factory_get_widget(main_menu, "<TextView>");
+
+    gtk_box_pack_start(GTK_BOX(box), widget, FALSE, FALSE, 0);
+    scroll = gtk_scrolled_window_new(NULL, NULL);
+    gtk_box_pack_start(GTK_BOX(box), scroll, TRUE, TRUE, 0);
+    view = gtk_text_view_new();
+    gtk_container_add(GTK_CONTAINER(scroll), view);
+
+//finish,show main
 
     gtk_widget_show_all(window);
     gtk_main();
