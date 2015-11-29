@@ -8,7 +8,7 @@ static gboolean key_event(GtkWidget *widget, GdkEventKey *event, gpointer user_d
     struct my_gtk *my = (struct my_gtk *)user_data;
     GtkTextMark *mark;
     GtkTextIter iter;
-    //g_printerr("%s\n", gdk_keyval_name (event->keyval));
+    g_printerr("%s\n", gdk_keyval_name (event->keyval));
     if(strcmp(gdk_keyval_name (event->keyval),"F12") == 0)
     {
        gtk_widget_hide(my->file_one);
@@ -21,12 +21,12 @@ static gboolean key_event(GtkWidget *widget, GdkEventKey *event, gpointer user_d
     {
         mark = gtk_text_buffer_get_insert(my->file_two);
         gtk_text_buffer_get_iter_at_mark(my->file_two, &iter, mark);
-	/*
+	
         if(gtk_text_buffer_get_char_count(my->file_two))
         {
            gtk_text_buffer_insert(my->file_two, &iter, "\n", 1);
         }
-	*/
+	
 	gtk_text_buffer_insert(my->file_two, &iter, "User:$ ", -1);
     }
 
@@ -44,8 +44,7 @@ int main(int argc, char *argv[])
 
     GtkAccelGroup *accel;
     GtkItemFactory *main_menu;
-    //GtkTextBuffer *buffer;
-
+    
     gtk_init(&argc, &argv);  // gtk initialize
 
     window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
@@ -57,8 +56,6 @@ int main(int argc, char *argv[])
 
     gtk_container_add(GTK_CONTAINER(window), box);
 
-//Default contents add
-//ITem,etc add start
 
     accel = gtk_accel_group_new();
     gtk_window_add_accel_group(GTK_WINDOW(window), accel);
@@ -72,7 +69,6 @@ int main(int argc, char *argv[])
     view = gtk_text_view_new();
     gtk_container_add(GTK_CONTAINER(scroll), view);
 
-//finish,show main
 
     gtk_widget_show_all(window);
     gtk_main();
