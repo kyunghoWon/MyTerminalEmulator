@@ -1,5 +1,6 @@
 //#include <gtk_internal.h>
 #include <gtk/gtk.h>
+#include <gdk/gdkkeysyms.h>
 #include <string.h>
 #include <stdlib.h>
 
@@ -7,8 +8,12 @@
 
 static gboolean key_event(GtkWidget *widget, GdkEventKey *event, gpointer user_data)
 {
-   default:
+  switch (event->keyval)
+  {
+
+    default:
       return FALSE;
+  }
 }
 
 
