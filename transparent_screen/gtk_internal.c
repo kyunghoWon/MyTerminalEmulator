@@ -7,41 +7,7 @@
 
 static gboolean key_event(GtkWidget *widget, GdkEventKey *event, gpointer user_data)
 {
-switch (event->keyval)
-  {
-    case GDK_p:
-      printf("key pressed: %s\n", "p");
-      break;
-    case GDK_s:
-      if (event->state & GDK_SHIFT_MASK)
-      {
-        printf("key pressed: %s\n", "shift + s");
-      }
-      else if (event->state & GDK_CONTROL_MASK)
-      {
-        printf("key pressed: %s\n", "ctrl + s");
-      }
-      else
-      {
-        printf("key pressed: %s\n", "s");
-      }
-      break;
-    case GDK_m:
-      if (event->state & GDK_SHIFT_MASK)
-      {
-        printf("key pressed: %s\n", "shift + m");
-      }
-      else if (event->state & GDK_CONTROL_MASK)
-      {
-        printf("key pressed: %s\n", "ctrl + m");
-      }
-      else
-      {
-        printf("key pressed: %s\n", "m");
-      }
-      break;
-
-    default:
+   default:
       return FALSE;
 }
 
