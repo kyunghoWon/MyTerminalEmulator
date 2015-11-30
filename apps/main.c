@@ -11,6 +11,7 @@
 #include <string.h>
 #include <stdlib.h>
 gboolean supports_alpha = FALSE;
+
 struct my_gtk
 {
    GtkWidget *file_one;
@@ -18,9 +19,9 @@ struct my_gtk
 };
 
 static void screen_changed(GtkWidget *widget, GdkScreen *old_screen, gpointer user_data);
-static gboolean draw(GtkWidget *widget, cairo_t *new_cr, gpointer user_data);
+static void draw(GtkWidget *widget, cairo_t *new_cr, gpointer user_data);
 static void clicked(GtkWindow *win, GdkEventButton *event, gpointer user_data);
-
+static void key_event(GtkWidget *widget, GdkEventKey *event, gpointer user_data);
 
 int main(int argc, char **argv)
 {
