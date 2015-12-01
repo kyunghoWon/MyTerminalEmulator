@@ -1,8 +1,8 @@
 main: main.o
-	gcc `pkg-config --cflags gtk+-3.0` -L../lib -lfuncs main.o -o main `pkg-config --libs gtk+-3.0`
+	gcc `pkg-config --cflags gtk+-3.0`  main.o -o main `pkg-config --libs gtk+-3.0` -L../lib -lfuncs -I../include
 
 main.o: main.c
-	gcc `pkg-config --cflags gtk+-3.0` -g -c -I../include main.c -o main.o `pkg-config --libs gtk+-3.0`
+	gcc `pkg-config --cflags gtk+-3.0` -g -c -L../lib -lfuncs -I../include main.c -o main.o `pkg-config --libs gtk+-3.0`
 
 clean:
 	rm -f main.o main

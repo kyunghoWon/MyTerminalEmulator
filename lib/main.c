@@ -1,16 +1,7 @@
-/*
- * Original code by: Mike - http://plan99.net/~mike/blog (now a dead link--unable to find it).
- * Modified by karlphillip for StackExchange:
- *     (http://stackoverflow.com/questions/3908565/how-to-make-gtk-window-background-transparent)
- * Re-worked for Gtk 3 by Louis Melahn, L.C., January 30, 2014.
- */
-
 #include <gtk/gtk.h>
-#include <gtk_internal.h>
-#include <gtk_external.h>
 #include <string.h>
 #include <stdlib.h>
-
+gboolean supports_alpha = FALSE;
 
 struct my_gtk
 {
@@ -18,47 +9,9 @@ struct my_gtk
    GtkTextBuffer *file_two;
 };
 
-void screen_changed(GtkWidget *widget, GdkScreen *old_screen, gpointer userdata)
-{
-    /* To check if the display supports alpha channels, get the visual */
-    GdkScreen *screen = gtk_widget_get_screen(widget);
-    GdkVisual *visual = gdk_screen_get_rgba_visual(screen);
-
-    if (!visual)
-    {
-        printf("Your screen does not support alpha channels!\n");
-        visual = gdk_screen_get_system_visual(screen);
-        supports_alpha = FALSE;
-    }
-    else
-    {
-        printf("Your screen supports alpha channels!\n");
-        supports_alpha = TRUE;
-    }
-
-    gtk_widget_set_visual(widget, visual);
-}
-
-gboolean draw(GtkWidget *widget, cairo_t *cr, gpointer userdata)
-{
-   cairo_t *new_cr = gdk_cairo_create(gtk_widget_get_window(widget));
-
-    if (supports_alpha)
-    {
-        cairo_set_source_rgba (new_cr, 0.5, 1.0, 0.50, 0.5); /* transparent */
-    }
-    else
-    {
-        cairo_set_source_rgb (new_cr, 1.0, 1.0, 1.0); /* opaque white */
-    }
-
-    /* draw the background */
-    cairo_set_operator (new_cr, CAIRO_OPERATOR_SOURCE);
-    cairo_paint (new_cr);
-    cairo_destroy(new_cr);
-
-    return FALSE;
-}
+static void screen_changed(GtkWidget *widget, GdkScreen *old_screen, gpointer user_data);
+static gboolean draw(GtkWidget *widget, cairo_t *cr, gpointer userdata);
+static void clicked(GtkWindow *win, GdkEventButton *event, gpointer user_data);
 
 int main(int argc, char **argv)
 {
@@ -119,7 +72,69 @@ int main(int argc, char **argv)
 }
 
 
+static void screen_changed(GtkWidget *widget, GdkScreen *old_screen, gpointer userdata)
+{
+    /* To check if the display supports alpha channels, get the visual */
+    GdkScreen *screen = gtk_widget_get_screen(widget);
+    GdkVisual *visual = gdk_screen_get_rgba_visual(screen);
 
+    if (!visual)
+    {
+        printf("Your screen does not support alpha channels!\n");
+        visual = gdk_screen_get_system_visual(screen);
+        supports_alpha = FALSE;
+    }
+    else
+    {
+        printf("Your screen supports alpha channels!\n");
+        supports_alpha = TRUE;
+    }
+
+    gtk_widget_set_visual(widget, visual);
+}
+
+static gboolean draw(GtkWidget *widget, cairo_t *cr, gpointer userdata)
+{
+   cairo_t *new_cr = gdk_cairo_create(gtk_widget_get_window(widget));
+
+    if (supports_alpha)
+    {
+        cairo_set_source_rgba (new_cr, 0.5, 1.0, 0.50, 0.5); /* transparent */
+    }
+    else
+    {
+        cairo_set_source_rgb (new_cr, 1.0, 1.0, 1.0); /* opaque white */
+    }
+
+    /* draw the background */
+    cairo_set_operator (new_cr, CAIRO_OPERATOR_SOURCE);
+    cairo_paint (new_cr);
+    cairo_destroy(new_cr);
+
+    return FALSE;
+}
+
+static void clicked(GtkWindow *win, GdkEventButton *event, gpointer user_data)
+{
+    /* toggle window manager frames */
+   // GtkWidget *window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+    GtkWidget *font_dialog = gtk_font_chooser_dialog_new("haha", NULL);
+    //gtk_container_add (GTK_CONTAINER (window), font_dialog);
+    gtk_widget_show_all (font_dialog); 
+    printA();
+    /*
+    if(i != 1)
+    {
+       
+    }
+    else
+    {
+       gtk_widget_show(user_data);
+       i=0;
+    }
+     */
+    //gtk_window_set_decorated(win, !gtk_window_get_decorated(win));
+}
 
 
 
