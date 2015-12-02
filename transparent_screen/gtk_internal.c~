@@ -10,7 +10,8 @@ static gboolean key_event(GtkWidget *widget, GdkEventKey *event, gpointer user_d
 {
   switch (event->keyval)
   {
-    case GDK_[:
+    case GDK_case GDK_KEY_bracketleft:
+//test it is acting
 
     default:
       return FALSE;

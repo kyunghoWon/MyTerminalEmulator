@@ -1,4 +1,4 @@
-//#include <gtk_internal.h>
+#include <gtk_internal.h>
 #include <gtk/gtk.h>
 #include <gdk/gdkkeysyms.h>
 #include <string.h>
@@ -6,12 +6,20 @@
 
 
 
+
 static gboolean key_event(GtkWidget *widget, GdkEventKey *event, gpointer user_data)
 {
+
+  GtkTextIter insert_text;
   switch (event->keyval)
   {
+    case GDK_case GDK_KEY_q:
+    printf("q key pressed!\n");
+    break;
     case GDK_case GDK_KEY_bracketleft:
-//test it is acting
+    printf("Bracket key pressed!\n");
+    gtk_text_buffer_insert(view,&insert_text"\n", 1);
+    break;
 
     default:
       return FALSE;
@@ -50,6 +58,7 @@ int main(int argc, char *argv[])
     gtk_box_pack_start(GTK_BOX(box), widget, FALSE, FALSE, 0);
     scroll = gtk_scrolled_window_new(NULL, NULL);
     gtk_box_pack_start(GTK_BOX(box), scroll, TRUE, TRUE, 0);
+
     view = gtk_text_view_new();
     gtk_container_add(GTK_CONTAINER(scroll), view);
 
