@@ -17,6 +17,7 @@ struct my_gtk
    GtkWidget *file_one;
    GtkTextBuffer *file_two;
    GtkWidget *btns[8];
+   GtkWidget *my_window;
 };
 
 void screen_changed(GtkWidget *widget, GdkScreen *old_screen, gpointer userdata)
@@ -101,6 +102,7 @@ int main(int argc, char **argv)
 
     mygtk.file_one = view;
     mygtk.file_two = buffer;
+    mygtk.my_window = window
     mygtk.btns[0] = button;
     mygtk.btns[1] = button2;
     mygtk.btns[2] = button3;
