@@ -6,6 +6,7 @@ struct my_gtk
 {
    GtkWidget *file_one;
    GtkTextBuffer *file_two;
+   GtkWidget *btns[8];
 };
 
 void printA()
@@ -22,10 +23,18 @@ gboolean key_event(GtkWidget *widget, GdkEventKey *event, gpointer user_data)
     if(strcmp(gdk_keyval_name (event->keyval),"F12") == 0)
     {
        gtk_widget_hide(my->file_one);
+       gtk_widget_hide(my->btns[0]);
+       gtk_widget_hide(my->btns[1]);
+       gtk_widget_hide(my->btns[2]);
+       gtk_widget_hide(my->btns[3]);
     }
     else if(strcmp(gdk_keyval_name(event->keyval),"F10") == 0)
     {
        gtk_widget_show(my->file_one);
+       gtk_widget_show(my->btns[0]);
+       gtk_widget_show(my->btns[1]);
+       gtk_widget_show(my->btns[2]);
+       gtk_widget_show(my->btns[3]);
     }
     else if(strcmp(gdk_keyval_name(event->keyval),"Return") == 0)
     {

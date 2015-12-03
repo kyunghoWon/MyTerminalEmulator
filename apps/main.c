@@ -16,6 +16,7 @@ struct my_gtk
 {
    GtkWidget *file_one;
    GtkTextBuffer *file_two;
+   GtkWidget *btns[8];
 };
 
 void screen_changed(GtkWidget *widget, GdkScreen *old_screen, gpointer userdata)
@@ -66,8 +67,8 @@ int main(int argc, char **argv)
     struct my_gtk mygtk;
     GtkWidget *window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
     GtkWidget *box = gtk_box_new(1,0); // 1: vbox, 0:hbox
+    GtkWidget *box_btns = gtk_box_new(0,0); // 1: vbox, 0:hbox
     GtkWidget* view;
-    printA();
     GtkTextBuffer* buffer = NULL;
     gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
     gtk_window_set_default_size(GTK_WINDOW(window), 800, 600);
@@ -83,7 +84,11 @@ int main(int argc, char **argv)
     gtk_widget_add_events(window, GDK_BUTTON_PRESS_MASK);
 
     gtk_container_add(GTK_CONTAINER(window), box);
-    GtkWidget* button = gtk_button_new_with_label("Make the screen trasparent");
+
+    GtkWidget* button = gtk_button_new_with_label("Font box");
+    GtkWidget* button2 = gtk_button_new_with_label("File box");
+    GtkWidget* button3 = gtk_button_new_with_label("File box");
+    GtkWidget* button4 = gtk_button_new_with_label("File box");
 
 
     view = gtk_text_view_new();
@@ -96,7 +101,10 @@ int main(int argc, char **argv)
 
     mygtk.file_one = view;
     mygtk.file_two = buffer;
-
+    mygtk.btns[0] = button;
+    mygtk.btns[1] = button2;
+    mygtk.btns[2] = button3;
+    mygtk.btns[3] = button4;
 
     g_signal_connect(window, "key-release-event", G_CALLBACK(key_event), &mygtk);
     g_signal_connect(G_OBJECT(window), "button-press-event", G_CALLBACK(clicked), view);
@@ -105,7 +113,12 @@ int main(int argc, char **argv)
     gtk_widget_set_size_request(button, 100, 50);
 
 
-    gtk_container_add(GTK_CONTAINER(box), button);
+    
+    gtk_container_add(GTK_CONTAINER(box_btns), button);
+    gtk_container_add(GTK_CONTAINER(box_btns), button2);
+    gtk_container_add(GTK_CONTAINER(box_btns), button3);
+    gtk_container_add(GTK_CONTAINER(box_btns), button4);
+    gtk_container_add(GTK_CONTAINER(box), box_btns);
     gtk_container_add(GTK_CONTAINER(box), view);
 
     screen_changed(window, NULL, NULL);

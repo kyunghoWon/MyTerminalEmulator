@@ -4,6 +4,5 @@
 
 void printA();
 gboolean key_event(GtkWidget *widget, GdkEventKey *event, gpointer user_data);
-void clicked(GtkWindow *win, GdkEventButton *event, gpointer user_data);
 
 #endif
