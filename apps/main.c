@@ -95,9 +95,9 @@ int main(int argc, char **argv)
     view = gtk_text_view_new();
     gtk_text_view_set_left_margin (GTK_TEXT_VIEW ( view ) , 10 ) ;
     gtk_text_view_set_right_margin (GTK_TEXT_VIEW ( view ) , 10 ) ;
-
+    gtk_text_view_set_pixels_above_lines(GTK_TEXT_VIEW(view), 5);
     buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(view));
-    gtk_text_buffer_set_text(buffer, "\nUser:$ ", -1);
+    gtk_text_buffer_set_text(buffer, "User:$ ", -1);
 
 
     mygtk.file_one = view;
