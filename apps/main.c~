@@ -96,20 +96,24 @@ int main(int argc, char **argv)
     gtk_text_view_set_right_margin (GTK_TEXT_VIEW ( view ) , 10 ) ;
 
     buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(view));
-    gtk_text_buffer_set_text(buffer, "User:$ ", -1);
+    gtk_text_buffer_set_text(buffer, "\nUser:$ ", -1);
 
 
     mygtk.file_one = view;
     mygtk.file_two = buffer;
-
+    mygtk.btns[0] = button;
+    mygtk.btns[1] = button2;
+    mygtk.btns[2] = button3;
+    mygtk.btns[3] = button4;
 
     g_signal_connect(window, "key-release-event", G_CALLBACK(key_event), &mygtk);
-    g_signal_connect(G_OBJECT(window), "button-press-event", G_CALLBACK(clicked), view);
+    g_signal_connect(G_OBJECT(button), "button-press-event", G_CALLBACK(clicked), &mygtk);
+    g_signal_connect(G_OBJECT(button2), "button-press-event", G_CALLBACK(clicked2), &mygtk);
+    g_signal_connect(G_OBJECT(button3), "button-press-event", G_CALLBACK(clicked3), &mygtk);
+    g_signal_connect(G_OBJECT(button4), "button-press-event", G_CALLBACK(clicked4), &mygtk);
 
     gtk_widget_set_size_request(view, 800,550);
     gtk_widget_set_size_request(button, 100, 50);
-
-
     
     gtk_container_add(GTK_CONTAINER(box_btns), button);
     gtk_container_add(GTK_CONTAINER(box_btns), button2);
@@ -122,7 +126,6 @@ int main(int argc, char **argv)
 
 
     gtk_widget_show_all(window);
-
     gtk_main();
 
     return 0;
