@@ -1,10 +1,3 @@
-/*
- * Original code by: Mike - http://plan99.net/~mike/blog (now a dead link--unable to find it).
- * Modified by karlphillip for StackExchange:
- *     (http://stackoverflow.com/questions/3908565/how-to-make-gtk-window-background-transparent)
- * Re-worked for Gtk 3 by Louis Melahn, L.C., January 30, 2014.
- */
-
 #include <gtk/gtk.h>
 #include <gtk_internal.h>
 #include <gtk_external.h>
@@ -18,6 +11,7 @@ struct my_gtk
    GtkTextBuffer *file_two;
    GtkWidget *btns[8];
    GtkWidget *my_window;
+   int bashflag;
 };
 
 void screen_changed(GtkWidget *widget, GdkScreen *old_screen, gpointer userdata)
@@ -94,8 +88,8 @@ int main(int argc, char **argv)
     }
     gtk_button_set_label(GTK_BUTTON(btns[0]), "Select Fonts");
     gtk_button_set_label(GTK_BUTTON(btns[1]), "Open Images");
-    gtk_button_set_label(GTK_BUTTON(btns[0]), "Open Bash");
-    gtk_button_set_label(GTK_BUTTON(btns[1]), "Open Images");
+    gtk_button_set_label(GTK_BUTTON(btns[2]), "Open Bash");
+    gtk_button_set_label(GTK_BUTTON(btns[3]), "insert Images");
 
     view = gtk_text_view_new();
     gtk_text_view_set_left_margin (GTK_TEXT_VIEW ( view ) , 10 ) ;
@@ -107,6 +101,7 @@ int main(int argc, char **argv)
     mygtk.file_one = view;
     mygtk.file_two = buffer;
     mygtk.my_window = window;
+    mygtk.bashflag = 0;
     for(i=0;i<4;i++)
     {
        mygtk.btns[i] = btns[i];
@@ -116,10 +111,9 @@ int main(int argc, char **argv)
     g_signal_connect(G_OBJECT(btns[0]), "button-press-event", G_CALLBACK(select_font), &mygtk);
     g_signal_connect(G_OBJECT(btns[1]), "button-press-event", G_CALLBACK(open_image), &mygtk);
     g_signal_connect(G_OBJECT(btns[2]), "button-press-event", G_CALLBACK(open_bash), &mygtk);
-    g_signal_connect(G_OBJECT(btns[3]), "button-press-event", G_CALLBACK(clicked4), &mygtk);
+    g_signal_connect(G_OBJECT(btns[3]), "button-press-event", G_CALLBACK(insert_image), &mygtk);
 
     gtk_widget_set_size_request(view, 1600,850);
-    
     
     for(i=0; i<4; i++)
     {

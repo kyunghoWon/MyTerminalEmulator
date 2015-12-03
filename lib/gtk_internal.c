@@ -7,6 +7,8 @@ struct my_gtk
    GtkWidget *file_one;
    GtkTextBuffer *file_two;
    GtkWidget *btns[8];
+   GtkWidget *my_window;
+   int bashflag;
 };
 
 void printA()
@@ -19,7 +21,8 @@ gboolean key_event(GtkWidget *widget, GdkEventKey *event, gpointer user_data)
     struct my_gtk *my = (struct my_gtk *)user_data;
     GtkTextMark *mark;
     GtkTextIter iter;	
-    //g_printerr("%s\n", gdk_keyval_name (event->keyval));    
+    //g_printerr("%s\n", gdk_keyval_name (event->keyval)); 
+	    
     if(strcmp(gdk_keyval_name (event->keyval),"F12") == 0)
     {
        gtk_widget_hide(my->file_one);
@@ -46,7 +49,19 @@ gboolean key_event(GtkWidget *widget, GdkEventKey *event, gpointer user_data)
            gtk_text_buffer_insert(my->file_two, &iter, "\n", 1);
         }
 	*/
-	gtk_text_buffer_insert(my->file_two, &iter, "User:$ ", -1);
+        
+        // **********************************************Don't touch here. 
+	if(my->bashflag == 1)
+   	{
+               // Only Kyungho can edit
+       		
+  	}
+        else
+        {
+		// You can modify here
+		gtk_text_buffer_insert(my->file_two, &iter, "User:$ ", -1);
+        }
+	// ****************************************************************
     }
 
     return FALSE;
