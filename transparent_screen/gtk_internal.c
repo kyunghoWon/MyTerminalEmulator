@@ -13,10 +13,11 @@ static gboolean key_event(GtkWidget *widget, GdkEventKey *event, gpointer user_d
   GtkTextIter insert_text;
   switch (event->keyval)
   {
-    case GDK_case GDK_KEY_q:
+ //keyconfig
+    case GDK_q:
     printf("q key pressed!\n");
     break;
-    case GDK_case GDK_KEY_bracketleft:
+    case GDK_bracketleft:
     printf("Bracket key pressed!\n");
     gtk_text_buffer_insert(view,&insert_text"\n", 1);
     break;
