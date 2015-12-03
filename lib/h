@@ -1,0 +1,14 @@
+gtk_external.c
+gtk_external.o
+gtk_internal.c
+gtk_internal.o
+h
+i.jpg
+image.jpg
+libfuncs.a
+main.c
+Makefile
+show
+show_image.c
+trying.c
+trying.c~

@@ -10,13 +10,9 @@ struct my_gtk
    GtkWidget *my_window;
 };
 
-
-
-void clicked(GtkWindow *win, GdkEventButton *event, gpointer user_data)
+void select_font(GtkWindow *win, GdkEventButton *event, gpointer user_data)
 {
     struct my_gtk *my = (struct my_gtk *)user_data;
-    /* toggle window manager frames */
-   // GtkWidget *window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
     GtkWidget *font_dialog = gtk_font_chooser_dialog_new("Font box", GTK_WINDOW(my->my_window));
     gtk_widget_show_all (font_dialog);
     gint resp = gtk_dialog_run(GTK_DIALOG(font_dialog));
@@ -29,11 +25,10 @@ void clicked(GtkWindow *win, GdkEventButton *event, gpointer user_data)
       printf("You pressed the cancel\n");
    
    gtk_widget_destroy(font_dialog);
-
     
 }
 
-void clicked2(GtkWindow *win, GdkEventButton *event, gpointer user_data)
+void open_image(GtkWindow *win, GdkEventButton *event, gpointer user_data)
 {
     struct my_gtk *my = (struct my_gtk *)user_data;
     char *_filename;
@@ -71,16 +66,12 @@ void clicked2(GtkWindow *win, GdkEventButton *event, gpointer user_data)
 
 }
 
-
-void clicked3(GtkWindow *win, GdkEventButton *event, gpointer user_data)
+void open_bash(GtkWindow *win, GdkEventButton *event, gpointer user_data)
 {
     struct my_gtk *my = (struct my_gtk *)user_data;
-    /* toggle window manager frames */
-   // GtkWidget *window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-    GtkWidget *font_dialog = gtk_font_chooser_dialog_new("haha", NULL);
-    gtk_widget_show_all (font_dialog); 
-}
 
+    
+}
 
 void clicked4(GtkWindow *win, GdkEventButton *event, gpointer user_data)
 {
@@ -90,4 +81,6 @@ void clicked4(GtkWindow *win, GdkEventButton *event, gpointer user_data)
     GtkWidget *font_dialog = gtk_font_chooser_dialog_new("haha", NULL);
     gtk_widget_show_all (font_dialog); 
 }
+
+
 

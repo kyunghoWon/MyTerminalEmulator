@@ -64,6 +64,7 @@ gboolean draw(GtkWidget *widget, cairo_t *cr, gpointer userdata)
 
 int main(int argc, char **argv)
 {
+    int i;
     gtk_init(&argc, &argv);
     struct my_gtk mygtk;
     GtkWidget *window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
@@ -72,7 +73,7 @@ int main(int argc, char **argv)
     GtkWidget* view;
     GtkTextBuffer* buffer = NULL;
     gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
-    gtk_window_set_default_size(GTK_WINDOW(window), 800, 600);
+    gtk_window_set_default_size(GTK_WINDOW(window), 1600, 900);
     gtk_window_set_title(GTK_WINDOW(window), "Our Editor");
     g_signal_connect(G_OBJECT(window), "delete-event", gtk_main_quit, NULL);
 
@@ -86,11 +87,15 @@ int main(int argc, char **argv)
 
     gtk_container_add(GTK_CONTAINER(window), box);
 
-    GtkWidget* button = gtk_button_new_with_label("Font box");
-    GtkWidget* button2 = gtk_button_new_with_label("File box");
-    GtkWidget* button3 = gtk_button_new_with_label("File box");
-    GtkWidget* button4 = gtk_button_new_with_label("File box");
-
+    GtkWidget* btns[8];
+    for(i=0; i<4; i++)
+    {
+       btns[i] = gtk_button_new();
+    }
+    gtk_button_set_label(GTK_BUTTON(btns[0]), "Select Fonts");
+    gtk_button_set_label(GTK_BUTTON(btns[1]), "Open Images");
+    gtk_button_set_label(GTK_BUTTON(btns[0]), "Open Bash");
+    gtk_button_set_label(GTK_BUTTON(btns[1]), "Open Images");
 
     view = gtk_text_view_new();
     gtk_text_view_set_left_margin (GTK_TEXT_VIEW ( view ) , 10 ) ;
@@ -99,34 +104,31 @@ int main(int argc, char **argv)
     buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(view));
     gtk_text_buffer_set_text(buffer, "User:$ ", -1);
 
-
     mygtk.file_one = view;
     mygtk.file_two = buffer;
     mygtk.my_window = window;
-    mygtk.btns[0] = button;
-    mygtk.btns[1] = button2;
-    mygtk.btns[2] = button3;
-    mygtk.btns[3] = button4;
+    for(i=0;i<4;i++)
+    {
+       mygtk.btns[i] = btns[i];
+    }
 
     g_signal_connect(window, "key-release-event", G_CALLBACK(key_event), &mygtk);
-    g_signal_connect(G_OBJECT(button), "button-press-event", G_CALLBACK(clicked), &mygtk);
-    g_signal_connect(G_OBJECT(button2), "button-press-event", G_CALLBACK(clicked2), &mygtk);
-    g_signal_connect(G_OBJECT(button3), "button-press-event", G_CALLBACK(clicked3), &mygtk);
-    g_signal_connect(G_OBJECT(button4), "button-press-event", G_CALLBACK(clicked4), &mygtk);
+    g_signal_connect(G_OBJECT(btns[0]), "button-press-event", G_CALLBACK(select_font), &mygtk);
+    g_signal_connect(G_OBJECT(btns[1]), "button-press-event", G_CALLBACK(open_image), &mygtk);
+    g_signal_connect(G_OBJECT(btns[2]), "button-press-event", G_CALLBACK(open_bash), &mygtk);
+    g_signal_connect(G_OBJECT(btns[3]), "button-press-event", G_CALLBACK(clicked4), &mygtk);
 
-    gtk_widget_set_size_request(view, 800,550);
-    gtk_widget_set_size_request(button, 100, 50);
+    gtk_widget_set_size_request(view, 1600,850);
     
-    gtk_container_add(GTK_CONTAINER(box_btns), button);
-    gtk_container_add(GTK_CONTAINER(box_btns), button2);
-    gtk_container_add(GTK_CONTAINER(box_btns), button3);
-    gtk_container_add(GTK_CONTAINER(box_btns), button4);
+    for(i=0; i<4; i++)
+    {
+        gtk_container_add(GTK_CONTAINER(box_btns), btns[i]);
+        gtk_widget_set_size_request(btns[i], 100, 50);
+    }
     gtk_container_add(GTK_CONTAINER(box), box_btns);
     gtk_container_add(GTK_CONTAINER(box), view);
 
     screen_changed(window, NULL, NULL);
-
-
     gtk_widget_show_all(window);
     gtk_main();
 
