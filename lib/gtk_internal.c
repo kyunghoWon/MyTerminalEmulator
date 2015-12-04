@@ -4,6 +4,11 @@
 #include <string.h>
 #include <stdlib.h>
 
+#define GDK_F12 0xffc9
+#define GDK_F10 0xffc7
+#define GDK_bracketleft 0x05b
+#define GDK_bracketright 0x05d
+#define GDK_KEY_MASK 0xffe1
 
 gboolean key_event(GtkWidget *widget, GdkEventKey *event, gpointer user_data)
 {
