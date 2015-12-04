@@ -9,6 +9,14 @@
 #define GDK_bracketleft 0x05b
 #define GDK_bracketright 0x05d
 #define GDK_KEY_MASK 0xffe1
+#define GDK_braceleft 0x07b
+#define GDK_leftsinglequotemark 0xad0
+#define GDK_leftdoublequotemark 0xad2
+
+
+#define GDK_KEY_S 0x053
+#define GDK_KEY_I 0x049
+#define GDK_KEY_D 0x044
 
 struct my_gtk
 {
@@ -20,10 +28,10 @@ struct my_gtk
 };
 
 
+
 gboolean key_event(GtkWidget *widget, GdkEventKey *event, gpointer user_data)
 {
 struct my_gtk *my = (struct my_gtk *)user_data;
-
 
 GtkTextMark *mark;
 GtkTextIter iter;
@@ -50,71 +58,31 @@ switch (event->keyval)
         mark = gtk_text_buffer_get_insert(my->file_two);
         gtk_text_buffer_get_iter_at_mark(my->file_two, &iter, mark);
 
-        // **********************************************Don't touch here.
-	if(my->bashflag == 1)
-   	{
-               //Kyungho Field
-  	}
-        else
-        {
-	    gtk_text_buffer_insert(my->file_two, &iter, "]", -1);
-        }
+
+	    gtk_text_buffer_insert(my->file_two, &iter, " ]", -1);
+        
 	break;
-	//case GDK_:
-	//여기는 중괄호에관한 걸로 넣고,에딧트 모드 추가할 예정
-	//break;
-}
-}
 
-/*
-gboolean key_event(GtkWidget *widget, GdkEventKey *event, gpointer user_data)
-{
-    struct my_gtk *my = (struct my_gtk *)user_data;
-    GtkTextMark *mark;
-    GtkTextIter iter;
-    //g_printerr("%s\n", gdk_keyval_name (event->keyval));
-
-    if(strcmp(gdk_keyval_name (event->keyval),"F12") == 0)
-    {
-       gtk_widget_hide(my->file_one);
-       gtk_widget_hide(my->btns[0]);
-       gtk_widget_hide(my->btns[1]);
-       gtk_widget_hide(my->btns[2]);
-       gtk_widget_hide(my->btns[3]);
-    }
-    else if(strcmp(gdk_keyval_name(event->keyval),"F10") == 0)
-    {
-       gtk_widget_show(my->file_one);
-       gtk_widget_show(my->btns[0]);
-       gtk_widget_show(my->btns[1]);
-       gtk_widget_show(my->btns[2]);
-       gtk_widget_show(my->btns[3]);
-    }
-    else if(strcmp(gdk_keyval_name(event->keyval),"bracketleft") == 0)
-    {
+	case GDK_braceleft:
         mark = gtk_text_buffer_get_insert(my->file_two);
         gtk_text_buffer_get_iter_at_mark(my->file_two, &iter, mark);
-
-        if(gtk_text_buffer_get_char_count(my->file_two))
-        {
-           gtk_text_buffer_insert(my->file_two, &iter, "\n", 1);
-        }
+        gtk_text_buffer_insert(my->file_two, &iter, " }", -1);
+	break;
 
 
-        // **********************************************Don't touch here.
-	if(my->bashflag == 1)
-   	{
-               // Only Kyungho can edit
 
-  	}
-        else
-        {
-		gtk_text_buffer_insert(my->file_two, &iter, "}", -1);
-        }
-	// ****************************************************************
-    }
 
-    return FALSE;
+      case GDK_S:
+
+	break;
+
+	case GDK_I:
+
+	break;
+
+	
+
 }
-*/
 
+
+}

@@ -7,6 +7,8 @@
 #include <stdlib.h>
 
 gboolean supports_alpha = FALSE;
+
+
 struct my_gtk
 {
    GtkWidget *file_one;
@@ -15,6 +17,8 @@ struct my_gtk
    GtkWidget *my_window;
    int bashflag;
 };
+
+
 
 void screen_changed(GtkWidget *widget, GdkScreen *old_screen, gpointer userdata)
 {
@@ -59,7 +63,9 @@ gboolean draw(GtkWidget *widget, cairo_t *cr, gpointer userdata)
 }
 
 int main(int argc, char **argv)
+
 {
+
     int i;
     gtk_init(&argc, &argv);
     struct my_gtk mygtk;
@@ -67,7 +73,10 @@ int main(int argc, char **argv)
     GtkWidget *box = gtk_box_new(1,0); // 1: vbox, 0:hbox
     GtkWidget *box_btns = gtk_box_new(0,0); // 1: vbox, 0:hbox
     GtkWidget* view;
+
+
     GtkTextBuffer* buffer = NULL;
+
     gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
     gtk_window_set_default_size(GTK_WINDOW(window), 1000, 700);
     gtk_window_set_title(GTK_WINDOW(window), "Our Editor");
@@ -130,6 +139,7 @@ int main(int argc, char **argv)
     gtk_main();
 
     return 0;
+
 }
 
 
