@@ -53,13 +53,13 @@ switch (event->keyval)
         // **********************************************Don't touch here.
 	if(my->bashflag == 1)
    	{
-               
-
+               //Kyungho Field
   	}
         else
         {
 	    gtk_text_buffer_insert(my->file_two, &iter, "]", -1);
         }
+
 	break;
 	//case GDK_:
 	//여기는 중괄호에관한 걸로 넣고,에딧트 모드 추가할 예정
