@@ -10,6 +10,16 @@
 #define GDK_bracketright 0x05d
 #define GDK_KEY_MASK 0xffe1
 
+struct my_gtk
+{
+   GtkWidget *file_one;
+   GtkTextBuffer *file_two;
+   GtkWidget *btns[8];
+   GtkWidget *my_window;
+   int bashflag;
+};
+
+
 gboolean key_event(GtkWidget *widget, GdkEventKey *event, gpointer user_data)
 {
 struct my_gtk *my = (struct my_gtk *)user_data;
@@ -51,9 +61,10 @@ switch (event->keyval)
 	    gtk_text_buffer_insert(my->file_two, &iter, "]", -1);
         }
 	break;
-	case GDK_bracketleft:
-
-	break;
+	//case GDK_:
+	//여기는 중괄호에관한 걸로 넣고,에딧트 모드 추가할 예정
+	//break;
+}
 }
 
 /*

@@ -10,6 +10,16 @@
 #define GDK_bracketright 0x05d
 #define GDK_KEY_MASK 0xffe1
 
+struct my_gtk
+{
+   GtkWidget *file_one;
+   GtkTextBuffer *file_two;
+   GtkWidget *btns[8];
+   GtkWidget *my_window;
+   int bashflag;
+};
+
+
 gboolean key_event(GtkWidget *widget, GdkEventKey *event, gpointer user_data)
 {
 struct my_gtk *my = (struct my_gtk *)user_data;
@@ -54,6 +64,7 @@ switch (event->keyval)
 	case GDK_bracketleft:
 
 	break;
+}
 }
 
 /*
