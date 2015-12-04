@@ -68,7 +68,7 @@ int main(int argc, char **argv)
     GtkWidget* view;
     GtkTextBuffer* buffer = NULL;
     gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
-    gtk_window_set_default_size(GTK_WINDOW(window), 1600, 900);
+    gtk_window_set_default_size(GTK_WINDOW(window), 1000, 700);
     gtk_window_set_title(GTK_WINDOW(window), "Our Editor");
     g_signal_connect(G_OBJECT(window), "delete-event", gtk_main_quit, NULL);
 
@@ -89,8 +89,8 @@ int main(int argc, char **argv)
     }
     gtk_button_set_label(GTK_BUTTON(btns[0]), "Select Fonts");
     gtk_button_set_label(GTK_BUTTON(btns[1]), "Open Images");
-    gtk_button_set_label(GTK_BUTTON(btns[2]), "Open Bash");
-    gtk_button_set_label(GTK_BUTTON(btns[3]), "insert Images");
+    gtk_button_set_label(GTK_BUTTON(btns[2]), "Save txt");
+    gtk_button_set_label(GTK_BUTTON(btns[3]), "Open txt");
 
     view = gtk_text_view_new();
     gtk_text_view_set_left_margin (GTK_TEXT_VIEW ( view ) , 10 ) ;
@@ -111,10 +111,10 @@ int main(int argc, char **argv)
     g_signal_connect(window, "key-release-event", G_CALLBACK(key_event), &mygtk);
     g_signal_connect(G_OBJECT(btns[0]), "button-press-event", G_CALLBACK(select_font), &mygtk);
     g_signal_connect(G_OBJECT(btns[1]), "button-press-event", G_CALLBACK(open_image), &mygtk);
-    g_signal_connect(G_OBJECT(btns[2]), "button-press-event", G_CALLBACK(open_bash), &mygtk);
-    g_signal_connect(G_OBJECT(btns[3]), "button-press-event", G_CALLBACK(insert_image), &mygtk);
+    g_signal_connect(G_OBJECT(btns[2]), "button-press-event", G_CALLBACK(save_txt), &mygtk);
+    g_signal_connect(G_OBJECT(btns[3]), "button-press-event", G_CALLBACK(open_txt), &mygtk);
 
-    gtk_widget_set_size_request(view, 1600,850);
+    gtk_widget_set_size_request(view, 1000,650);
     
     for(i=0; i<4; i++)
     {

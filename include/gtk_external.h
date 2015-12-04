@@ -3,6 +3,7 @@
 #include <gtk/gtk.h>
 void select_font(GtkWindow *win, GdkEventButton *event, gpointer user_data);
 void open_image(GtkWindow *win, GdkEventButton *event, gpointer user_data);
-void open_bash(GtkWindow *win, GdkEventButton *event, gpointer user_data);
+void save_txt(GtkWindow *win, GdkEventButton *event, gpointer user_data);
+void open_txt(GtkWindow *win, GdkEventButton *event, gpointer user_data);
 void insert_image(GtkWindow *win, GdkEventButton *event, gpointer user_data);
 #endif
