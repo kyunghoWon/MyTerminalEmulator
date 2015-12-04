@@ -1,4 +1,5 @@
 #include <gdk-pixbuf/gdk-pixbuf.h>
+#include <gdk/gdk.h>
 #include <gtk/gtk.h>
 #include <gtk_internal.h>
 #include <gtk_external.h>
@@ -97,7 +98,7 @@ int main(int argc, char **argv)
     gtk_text_view_set_right_margin (GTK_TEXT_VIEW ( view ) , 10 ) ;
     gtk_text_view_set_pixels_above_lines(GTK_TEXT_VIEW(view), 5);
     buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(view));
-    gtk_text_buffer_set_text(buffer, "User:$ ", -1);
+   // gtk_text_buffer_set_text(buffer, "", -1);
 
     mygtk.file_one = view;
     mygtk.file_two = buffer;
@@ -115,7 +116,7 @@ int main(int argc, char **argv)
     g_signal_connect(G_OBJECT(btns[3]), "button-press-event", G_CALLBACK(open_txt), &mygtk);
 
     gtk_widget_set_size_request(view, 1000,650);
-    
+
     for(i=0; i<4; i++)
     {
         gtk_container_add(GTK_CONTAINER(box_btns), btns[i]);

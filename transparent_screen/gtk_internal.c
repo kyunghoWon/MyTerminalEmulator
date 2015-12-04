@@ -1,5 +1,6 @@
-#include <gtk_internal.h>
+//#include <gtk_internal.h>
 #include <gtk/gtk.h>
+#include <gdk/gdk.h>
 #include <gdk/gdkkeysyms.h>
 #include <string.h>
 #include <stdlib.h>
@@ -7,19 +8,22 @@
 
 
 
-static gboolean key_event(GtkWidget *widget, GdkEventKey *event, gpointer user_data)
+gboolean key_event(GtkWidget *widget, GdkEventKey *event, gpointer user_data)
 {
 
   GtkTextIter insert_text;
+  GdkEvent *event_bracket;
+
+  event_bracket = gdk_event_new(GDK_bracketright);
   switch (event->keyval)
   {
  //keyconfig
-    case GDK_q:
-    printf("q key pressed!\n");
+    case GDK_p:
+    printf("p key pressed!\n");
     break;
     case GDK_bracketleft:
     printf("Bracket key pressed!\n");
-    gtk_text_buffer_insert(view,&insert_text"\n", 1);
+    gtk_text_buffer_insert(view,&insert_text,"}", 1);
     break;
 
     default:
@@ -38,7 +42,7 @@ int main(int argc, char *argv[])
     GtkWidget *view;
 
     GtkAccelGroup *accel;
-    GtkItemFactory *main_menu;
+    //GtkItemFactory *main_menu;
 
     gtk_init(&argc, &argv);  // gtk initialize
 
@@ -52,9 +56,9 @@ int main(int argc, char *argv[])
 
     accel = gtk_accel_group_new();
     gtk_window_add_accel_group(GTK_WINDOW(window), accel);
-    main_menu = gtk_item_factory_new(GTK_TYPE_MENU_BAR, "<TextView>", accel);
+    //main_menu = gtk_item_factory_new(GTK_TYPE_MENU_BAR, "<TextView>", accel);
 
-    widget = gtk_item_factory_get_widget(main_menu, "<TextView>");
+    //widget = gtk_item_factory_get_widget(main_menu, "<TextView>");
 
     gtk_box_pack_start(GTK_BOX(box), widget, FALSE, FALSE, 0);
     scroll = gtk_scrolled_window_new(NULL, NULL);
