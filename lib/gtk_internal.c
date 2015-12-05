@@ -38,9 +38,9 @@ GtkTextMark *mark;
 GtkTextIter iter;
 
 switch (event->keyval)
- {
+ {	
     case GDK_F12:
-      printf("key pressed: %s\n", "F12");
+      
        gtk_widget_hide(my->file_one);
        gtk_widget_hide(my->btns[0]);
        gtk_widget_hide(my->btns[1]);
@@ -69,19 +69,19 @@ switch (event->keyval)
         gtk_text_buffer_get_iter_at_mark(my->file_two, &iter, mark);
         gtk_text_buffer_insert(my->file_two, &iter, " }", -1);
 	break;
-
-
-
-
-      case GDK_S:
+/*
+        case S:
 
 	break;
 
 	case GDK_I:
 
 	break;
-
-	
+*/
+	default:
+		printf("key pressed: %s\n", gdk_keyval_name(event->keyval));
+		// if you want to handle keyval by name, use gdk_keyval_name
+	break;
 
 }
 
