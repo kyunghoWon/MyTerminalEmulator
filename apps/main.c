@@ -72,7 +72,7 @@ int main(int argc, char **argv)
     GtkWidget *window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
     GtkWidget *box = gtk_box_new(1,0); // 1: vbox, 0:hbox
     GtkWidget *box_btns = gtk_box_new(0,0); // 1: vbox, 0:hbox
-    GtkWidget* view;
+    //GtkWidget* view;
 
 
     GtkTextBuffer* buffer = NULL;
