@@ -63,9 +63,8 @@ void open_image(GtkWindow *win, GdkEventButton *event, gpointer user_data)
    {
      window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
      gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
-     gtk_window_set_title(GTK_WINDOW(window), "Red Rock");
+     gtk_window_set_title(GTK_WINDOW(window), "Image Viewer");
   
-     printf("%s\n", _filename);
      image = gtk_image_new_from_file(_filename);
 
      gtk_container_add(GTK_CONTAINER(window), image);
@@ -175,45 +174,6 @@ void save_txt(GtkWindow *win, GdkEventButton *event, gpointer user_data)
       close(fp);
    }
    
-   
-
-   
-   }
-
-void insert_image(GtkWindow *win, GdkEventButton *event, gpointer user_data)
-{
-   struct my_gtk *my = (struct my_gtk *)user_data;
-   char *_filename;
-   GtkWidget *image;
-   GtkTextMark *mark;
-   GtkTextIter iter;
-   GdkPixbuf *pixbuf;
-   GError *gerror;
- 
-   GtkWidget *dialog;
-   dialog = gtk_file_chooser_dialog_new("Choose a file", GTK_WINDOW(my->my_window), GTK_FILE_CHOOSER_ACTION_OPEN, "Open", GTK_RESPONSE_OK, "Cancel", GTK_RESPONSE_CANCEL, NULL);
-   gtk_widget_show_all(dialog);
-   gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER(dialog), "./");
-   gint resp = gtk_dialog_run(GTK_DIALOG(dialog));
-
-   if(resp==GTK_RESPONSE_OK)
-   {
-      printf("%s\n", gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(dialog)));
-      _filename = (char *)malloc(256);
-      sprintf(_filename, "%s", gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(dialog)));
-   }
-   else
-      printf("You pressed the cancel\n");
-   
-   gtk_widget_destroy(dialog);
-   
-  // pixbuf = gdk_pixbuf_new_from_file(_filename, &gerror);
-   
-   
-  // mark = gtk_text_buffer_get_insert(my->file_two);
-  // gtk_text_buffer_get_iter_at_mark(my->file_two, &iter, mark);
-      
-  // gtk_text_buffer_insert_pixbuf (my->file_two, &iter, pixbuf);
 }
 
 
