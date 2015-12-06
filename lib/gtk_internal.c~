@@ -26,6 +26,7 @@ struct my_gtk
 };
 
 
+
 gboolean key_event(GtkWidget *widget, GdkEventKey *event, gpointer user_data)
 {
 struct my_gtk *my = (struct my_gtk *)user_data;
@@ -34,6 +35,7 @@ struct my_gtk *my = (struct my_gtk *)user_data;
 switch (event->keyval)
  {
        case GDK_F4:
+
        textfind();
        break;
        case GDK_F12:

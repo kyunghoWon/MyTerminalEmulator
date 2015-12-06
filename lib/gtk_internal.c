@@ -16,6 +16,9 @@ extern GtkWidget *view;
 GtkWidget *text_view;
 GtkWidget *search_entry;
 
+
+
+
 struct my_gtk
 {
    GtkWidget *file_one;
@@ -24,8 +27,6 @@ struct my_gtk
    GtkWidget *my_window;
    int bashflag;
 };
-
-
 
 gboolean key_event(GtkWidget *widget, GdkEventKey *event, gpointer user_data)
 {
