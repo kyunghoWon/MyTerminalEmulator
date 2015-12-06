@@ -17,4 +17,5 @@ void find();
 void win_destroy();
 void next_button_clicked();
 void search_button_clicked(); 
+void textfind();
 #endif

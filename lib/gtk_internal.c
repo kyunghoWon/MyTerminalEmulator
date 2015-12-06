@@ -80,6 +80,7 @@ switch (i)
        gtk_widget_hide(val->btns[1]);
        gtk_widget_hide(val->btns[2]);
        gtk_widget_hide(val->btns[3]);
+       gtk_widget_hide(val->btns[4]);
       break;
      
      case 2:
@@ -88,6 +89,7 @@ switch (i)
        gtk_widget_show(val->btns[1]);
        gtk_widget_show(val->btns[2]);
        gtk_widget_show(val->btns[3]);
+       gtk_widget_show(val->btns[4]);
        break;
  }
 
@@ -199,11 +201,12 @@ void textfind(void)
 
 
   win = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-
-  vbox = gtk_vbox_new (FALSE, 2);
+  gtk_window_set_position(GTK_WINDOW(win), GTK_WIN_POS_CENTER);
+  gtk_window_set_title(GTK_WINDOW(win), "Search Words");
+  vbox = gtk_box_new (1, 0);
   gtk_container_add (GTK_CONTAINER (win), vbox);
 
-  hbox = gtk_hbox_new (FALSE, 2);
+  hbox = gtk_box_new (0, 0);
 
   gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
   
