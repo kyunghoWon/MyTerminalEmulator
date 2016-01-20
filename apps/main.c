@@ -8,7 +8,7 @@
 
 gboolean supports_alpha = FALSE;
 
-
+// Kyungho created.
 struct my_gtk
 {
    GtkWidget *file_one;
